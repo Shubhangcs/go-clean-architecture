@@ -3,6 +3,7 @@ package controllers
 import (
 	"encoding/json"
 	"net/http"
+
 	"github.com/Shubhangcs/go-clean-architecture/db"
 	"github.com/Shubhangcs/go-clean-architecture/models"
 )
@@ -25,5 +26,19 @@ func CreatingFoodTable(w http.ResponseWriter, r *http.Request) {
 	//Setting headers to have json data
 	w.Header().Set("Content-Type", "application/json")
 	//Sending back the response of table creation
-	json.NewEncoder(w).Encode(models.SimplePayload{Message: "Table Created Successfully" , Status: http.StatusCreated})
+	json.NewEncoder(w).Encode(models.SimplePayload{Message: "Table Created Successfully", Status: http.StatusCreated})
+}
+
+func CreateOredrTable(w http.ResponseWriter, r *http.Request) {
+	ct := *connectToDatabase
+	_, err := ct.ConnectionStr.Exec("CREATE TABLE ORDERS(ORDER_ID INTEGER PRIMARY KEY , ORDER_NAME VARCHAR(30) , ORDER_ADDRESS VARCHAR(50) , ORDER_PRICE INTEGER)")
+	if err != nil {
+		panic(err)
+	}
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(models.SimplePayload{Message: "Table Created Successfully", Status: http.StatusCreated})
+
+	defer ct.ConnectionStr.Close()
+	defer r.Body.Close()
+
 }

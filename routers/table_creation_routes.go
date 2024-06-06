@@ -9,4 +9,5 @@ import (
 //Routers related to creating tabels are found here
 func InitialTableCreationRoutes(router *mux.Router){
 	router.HandleFunc("/create/foodtable" , controllers.CreatingFoodTable).Methods("PUT")
+	router.HandleFunc("/create/ordertable" , controllers.CreateOredrTable).Methods("PUT")
 }
