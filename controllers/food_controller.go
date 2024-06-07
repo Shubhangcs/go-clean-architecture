@@ -3,20 +3,22 @@ package controllers
 import (
 	"encoding/json"
 	"net/http"
-
 	"github.com/Shubhangcs/go-clean-architecture/db"
 	"github.com/Shubhangcs/go-clean-architecture/models"
 )
 
 //this controller deals with adding food items and performing operations related to food items
 
+type Queries struct{
+	QueryString string
+}
+
 // Database connection instance
 var connectToDatabase *db.DBConnection = db.NewDatabaseConnection("root", "password", "restaurant")
 
-// Only Used First Time Just to Create Tables
-func CreatingFoodTable(w http.ResponseWriter, r *http.Request) {
+func (q *Queries) CreateTableFunction(w http.ResponseWriter , r *http.Request) {
 	ct := *connectToDatabase
-	_, err := ct.ConnectionStr.Exec("CREATE TABLE FOOD(FOOD_ID INTEGER PRIMARY KEY , FOOD_NAME VARCHAR(30) , FOOD_TYPE VARCHAR(10) , FOOD_PRICE INTEGER);")
+	_, err := ct.ConnectionStr.Exec(q.QueryString)
 	if err != nil {
 		panic(err)
 	}
@@ -27,18 +29,4 @@ func CreatingFoodTable(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	//Sending back the response of table creation
 	json.NewEncoder(w).Encode(models.SimplePayload{Message: "Table Created Successfully", Status: http.StatusCreated})
-}
-
-func CreateOredrTable(w http.ResponseWriter, r *http.Request) {
-	ct := *connectToDatabase
-	_, err := ct.ConnectionStr.Exec("CREATE TABLE ORDERS(ORDER_ID INTEGER PRIMARY KEY , ORDER_NAME VARCHAR(30) , ORDER_ADDRESS VARCHAR(50) , ORDER_PRICE INTEGER)")
-	if err != nil {
-		panic(err)
-	}
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(models.SimplePayload{Message: "Table Created Successfully", Status: http.StatusCreated})
-
-	defer ct.ConnectionStr.Close()
-	defer r.Body.Close()
-
 }
