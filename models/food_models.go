@@ -8,3 +8,7 @@ type Food struct {
 	Price  string `json:"price"`
 	Ratint int    `json:"rating"`
 }
+
+type FoodRepository interface{
+	CreateFoodTable() (string , error)
+}

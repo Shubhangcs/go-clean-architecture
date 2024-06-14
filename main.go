@@ -27,7 +27,7 @@ func main(){
 	PORT := ":8000"
 
 	//Routers
-	routers.InitialTableCreationRoutes(router);
+	// routers.InitialTableCreationRoutes(router);
 
 	log.Printf("Server is Running at PORT %v" , PORT)
 
