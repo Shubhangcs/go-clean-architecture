@@ -1,8 +1,11 @@
 package main
 
 import (
+	"database/sql"
+	_ "github.com/go-sql-driver/mysql"
 	"log"
 	"net/http"
+	"github.com/Shubhangcs/go-clean-architecture/routers"
 	"github.com/gorilla/mux"
 )
 
@@ -10,6 +13,7 @@ import (
 // clean architecture for more info checkout https://github.com/Shubhangcs/go-clean-architecture
 
 func main(){
+	db , _ := sql.Open("mysql" , "root:password@tcp(127.0.0.1:3306)/restaurant")
 	//packages being used
 	/*
 	-> fmt
@@ -23,6 +27,7 @@ func main(){
 	*/
 	router := mux.NewRouter()
 	PORT := ":8000"
+	routers.UserRouter(db , router)
 
 	//Routers
 	// routers.InitialTableCreationRoutes(router);
