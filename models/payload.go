@@ -4,5 +4,4 @@ package models
 
 type SimplePayload struct {
 	Message string `json:"message"`
-	Status  int64  `json:"status"`
 }

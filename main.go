@@ -3,8 +3,6 @@ package main
 import (
 	"log"
 	"net/http"
-
-	"github.com/Shubhangcs/go-clean-architecture/routers"
 	"github.com/gorilla/mux"
 )
 
