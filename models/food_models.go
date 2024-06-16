@@ -11,5 +11,4 @@ type Food struct {
 
 type FoodRepository interface{
 	CreateFoodTable() (string , error)
-	
 }
