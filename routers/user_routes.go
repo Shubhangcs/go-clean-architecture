@@ -12,4 +12,5 @@ func UserRouter(db *sql.DB , router *mux.Router){
 	cont := controllers.NewHelperInstance(user)
 
 	router.HandleFunc("/user" , cont.CreateTable).Methods("GET")
+	router.HandleFunc("/register" , cont.RegisterUser).Methods("POST")
 }
