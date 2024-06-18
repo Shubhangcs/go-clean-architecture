@@ -26,7 +26,7 @@ func main(){
 	-> mysql
 	*/
 	router := mux.NewRouter()
-	PORT := ":8000"
+	PORT := ":9000"
 	routers.UserRouter(db , router)
 
 	//Routers
