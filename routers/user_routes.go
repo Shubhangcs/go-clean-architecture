@@ -8,7 +8,7 @@ import (
 )
 
 func UserRouter(db *sql.DB , router *mux.Router){
-	user := repository.NewUserRepo(db)
+	user := repository.NewUserRepoInstance(db)
 	cont := controllers.NewHelperInstance(user)
 
 	router.HandleFunc("/user" , cont.CreateTable).Methods("GET")

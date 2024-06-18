@@ -9,7 +9,7 @@ type UserRepo struct{
 	db *sql.DB
 }
 
-func NewUserRepo(sdb *sql.DB) *UserRepo{
+func NewUserRepoInstance(sdb *sql.DB) *UserRepo{
 	return &UserRepo{
 		db: sdb,
 	}
