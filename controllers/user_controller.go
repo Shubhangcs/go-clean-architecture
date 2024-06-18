@@ -11,18 +11,18 @@ import (
 
 
 type UserHelper struct{
-	userRepoIns models.UserRepository
+	userRepoInterf models.UserRepository
 }
 
 func NewHelperInstance(rep models.UserRepository) *UserHelper{
 	return &UserHelper{
-		userRepoIns: rep,
+		userRepoInterf: rep,
 	}
 }
 
 func (hlp UserHelper) CreateTable(w http.ResponseWriter , r *http.Request){
 	w.Header().Set("Content-Type", "application/json")
-	err := hlp.userRepoIns.CreateUserTable()
+	err := hlp.userRepoInterf.CreateUserTable()
 	if err != nil{
 		w.WriteHeader(401)
 		json.NewEncoder(w).Encode(models.SimplePayload{Message: "Someting Went Wrong"})
