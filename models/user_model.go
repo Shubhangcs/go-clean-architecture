@@ -1,16 +1,18 @@
 package models
 
+import "io"
+
 //User Model
-type User struct{
-	Id int `json:"id"`
-	Name string `json:"name"`
-	Email string `json:"email"`
-	Password string `json:"password"`
-	Address string `json:"address"`
+
+type UserModel struct{
+	UserId string `json:"id"`
+	UserName string `json:"name"`
+	UserEmail string `json:"email"`
+	UserPassword string `json:"password"`
 }
 
-type UserRepository interface{
+type UserModelInterface interface{
 	CreateUserTable() error
-	RegisterUser(User) error
-	LoginUser() error
+	RegisterUser(*io.ReadCloser) error
 }
+
